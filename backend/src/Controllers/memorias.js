@@ -16,6 +16,21 @@ const pegarMemorias = async (req, res) => {
     }
 }
 
+const pegarMemoria = async (req, res) => {
+    let resposta 
+    try {
+        resposta = await memoriaModel.findById( req.params.id )
+    } catch(erro) {
+        console.log(erro)
+    }
+
+    if(resposta) {
+        res.status(200).json(resposta)
+    } else {
+        res.status(400).json({'erro': 'Erro ao pegar memórias'})
+    }
+}
+
 const addMemoria = async (req, res) => {
     let resposta
     try {
@@ -50,5 +65,6 @@ const removerMemoria = async (req, res) => {
 module.exports = {
     pegarMemorias,
     addMemoria,
-    removerMemoria
+    removerMemoria,
+    pegarMemoria
 }

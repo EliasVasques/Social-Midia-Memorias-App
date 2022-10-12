@@ -1,10 +1,12 @@
 const { Router } = require("express")
 
-const { pegarMemorias, addMemoria, removerMemoria } = require('../Controllers/memorias')
+const { pegarMemorias, addMemoria, removerMemoria, pegarMemoria } = require('../Controllers/memorias')
 
 const router = Router()
 
-router.get('',pegarMemorias)
+router.get('', pegarMemorias)
+
+router.get('/:id', pegarMemoria)
 
 router.post('', addMemoria)
 

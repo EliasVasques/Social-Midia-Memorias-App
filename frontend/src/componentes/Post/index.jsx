@@ -8,13 +8,16 @@ const Post = ({ memoria }) => {
             method: 'DELETE'
         })
     }
+    const editarMemoria = () => {
+        window.location = `http://localhost:3000?editando=${memoria._id}`
+    }
 
     return(
         <div className="post">
             <div className="imagem">
                <div>
                    <p className="usuario">{ memoria.criador }</p>
-                   <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                   <ion-icon onClick={editarMemoria} name="ellipsis-horizontal-outline"></ion-icon>
                </div>
                <p className="tempo-atras">{ memoria.updatedAt.slice(0, 10) }</p>
             </div>
