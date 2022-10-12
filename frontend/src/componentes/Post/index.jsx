@@ -1,15 +1,22 @@
 import React from "react"
 import './index.css'
+import { decrement, increment, setEstado } from '../../redux/counterSlice'
+import { useSelector, useDispatch } from 'react-redux'
 
 const Post = ({ memoria }) => {
+
+    const dispatch = useDispatch()
 
     const deletarMemoria = async () => {
         await fetch(`http://localhost:5000/api/memorias/${memoria._id}`, {
             method: 'DELETE'
         })
     }
-    const editarMemoria = () => {
-        window.location = `http://localhost:3000?editando=${memoria._id}`
+
+    const editarMemoria = async () => {
+        fetch(`http://localhost:5000/api/memorias/${memoria._id}`)
+            .then((resposta) => resposta.json())
+            .then((memoria) => dispatch(setEstado(memoria)))
     }
 
     return(

@@ -1,9 +1,14 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from "react"
+import { useSelector, useDispatch } from 'react-redux'
+
 import './index.css'
 
-const Form = ({ editando }) => {
+const Form = () => {
+
+    const count = useSelector((state) => state.counter.value)
+    const dispatch = useDispatch()
 
     const [memoria, setMemoria] = useState({
         criador: '',
@@ -11,20 +16,6 @@ const Form = ({ editando }) => {
         texto: '',
         tags: '',
     })
-
-    const setarMemoriaEditando = async () => {
-        await fetch(`http://localhost:5000/api/memorias/${editando}`)
-            .then((resposta) => resposta.json())
-            .then((memoria) => {
-                setMemoria(memoria)
-            })
-    }
-
-    useEffect(() => {
-        if(editando) {
-            setarMemoriaEditando()
-        }
-    }, [])
 
     const enviar = async (e) => {
         e.preventDefault()
@@ -42,26 +33,27 @@ const Form = ({ editando }) => {
 
     return(
         <form onSubmit={enviar}>
+
             <h3>Criar Memória</h3>
 
             <div className="campo-input">
                 <label>Criador</label>
-                <input type="text" onChange={(e) => setMemoria({ ...memoria, criador: e.target.value })} value={memoria.criador} />
+                <input type="text" onChange={(e) => setMemoria({ ...memoria, criador: e.target.value })} value={count ? count.criador : memoria.criador} />
             </div>
 
             <div className="campo-input">
                 <label>Título</label>
-                <input type="text" onChange={(e) => setMemoria({ ...memoria, titulo: e.target.value })} value={memoria.titulo} />
+                <input type="text" onChange={(e) => setMemoria({ ...memoria, titulo: e.target.value })} value={count ? count.titulo : memoria.titulo} />
             </div>
 
             <div className="campo-input">
                 <label>Texto</label>
-                <input type="text" onChange={(e) => setMemoria({ ...memoria, texto: e.target.value })} value={memoria.texto} />
+                <input type="text" onChange={(e) => setMemoria({ ...memoria, texto: e.target.value })} value={count ? count.texto : memoria.texto} />
             </div>
 
             <div className="campo-input">
                 <label>Tags</label>
-                <input type="text" onChange={(e) => setMemoria({ ...memoria, tags: e.target.value })} value={memoria.tags} />
+                <input type="text" onChange={(e) => setMemoria({ ...memoria, tags: e.target.value })} value={count ? count.tags : memoria.tags} />
             </div>
 
             <div className="campo-imagem">
