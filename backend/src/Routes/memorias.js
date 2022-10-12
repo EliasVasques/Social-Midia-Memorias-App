@@ -2,6 +2,8 @@ const { Router } = require("express")
 const memoria = require("../Models/memoria")
 const memoriaSchema = require('../Models/memoria')
 
+
+
 const router = Router()
 
 router.get('', async (req, res) => {
