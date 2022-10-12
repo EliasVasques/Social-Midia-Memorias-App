@@ -1,0 +1,45 @@
+.post {
+    width: 200px;
+    height: 300px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.textos {
+    height: 150px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.textos > p {
+    font-size: 10px;
+}
+.textos > h3 {
+    font-size: 16px;
+}
+.textos > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.imagem {
+    width: 200px;
+    height: 150px;
+    background-size: cover;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRclejoHlkZCarPR3xN6vNtfhbpUikGi5W10w&usqp=CAU');
+    padding: 5px;
+    color: #fff;    
+}
+.imagem > div {
+    display: flex;
+    justify-content: space-between; 
+}
+.usuario {
+    font-size: 16px;
+}
+.imagem > .tempo-atras {
+    font-size: 10px;
+}
+
