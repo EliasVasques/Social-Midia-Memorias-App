@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 
-const memorias = require('./Routes/memorias') 
+const memoriasRoute = require('./Routes/memorias') 
 require('dotenv').config()
 
 const app = express()
@@ -16,4 +16,4 @@ mongoose.connect(process.env.MONGO_URI)
     })
     .catch((erro) => console.log(erro))
 
-app.use('/api/memorias', memorias)
+app.use('/api/memorias', memoriasRoute)

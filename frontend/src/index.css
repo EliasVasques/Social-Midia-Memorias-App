@@ -3,6 +3,7 @@
    License: none (public domain)
 */
 
+/* RESET CSS */
 * {
 	box-sizing: border-box;
 }
@@ -27,32 +28,25 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
 body {
 	line-height: 1;
 }
 ol, ul {
 	list-style: none;
 }
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
 
+/* APP CSS */
 .container {
 	background-color: blanchedalmond;
+	display: grid;
+	grid-template-columns: 5fr 2fr ;
+}
+.container-form {
 	display: flex;
-	height: 100vh;
+	justify-content: center;
+}
+.posts {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }

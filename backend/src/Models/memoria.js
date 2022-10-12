@@ -12,14 +12,15 @@ const memoriaSchema  = new Schema({
     },
     texto: {
         type: String,
-        //required: true
+        required: true
     },
     tags: {
         type: String,
-        //required: true
+        required: true
     },
-    /* img: {
-        type: String,
+    /*img: {
+        data: Buffer,
+        contentType: String,
         required: true
     },*/
 }, { timestamps: true })

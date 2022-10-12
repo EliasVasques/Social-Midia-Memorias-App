@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from "react"
 import './index.css'
-import InputText from "../InputText"
 
 const Form = () => {
 
@@ -14,6 +13,7 @@ const Form = () => {
 
     const enviar = async (e) => {
         e.preventDefault()
+        
         console.log(memoria)
         
         const resposta = await fetch('http://localhost:5000/api/memorias', {
@@ -51,7 +51,7 @@ const Form = () => {
             </div>
 
             <div className="campo-imagem">
-                <input type="file" />
+                <input type="file" onChange={(e) => setMemoria({ ...memoria, imagem: e.target.value })} />
             </div>
 
             <button type="submit">Criar</button>
