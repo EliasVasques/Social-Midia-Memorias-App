@@ -1,7 +1,8 @@
 import React from "react"
+import { useDispatch } from 'react-redux'
+
 import './index.css'
-import { decrement, increment, setEstado } from '../../redux/counterSlice'
-import { useSelector, useDispatch } from 'react-redux'
+import { pegarMemorias } from "../../redux/pegarMemoriasthunk"
 
 const Post = ({ memoria }) => {
 
@@ -11,20 +12,14 @@ const Post = ({ memoria }) => {
         await fetch(`http://localhost:5000/api/memorias/${memoria._id}`, {
             method: 'DELETE'
         })
+        dispatch(pegarMemorias())
     }
-
-    const editarMemoria = async () => {
-        fetch(`http://localhost:5000/api/memorias/${memoria._id}`)
-            .then((resposta) => resposta.json())
-            .then((memoria) => dispatch(setEstado(memoria)))
-    }
-
     return(
         <div className="post">
             <div className="imagem">
                <div>
                    <p className="usuario">{ memoria.criador }</p>
-                   <ion-icon onClick={editarMemoria} name="ellipsis-horizontal-outline"></ion-icon>
+                   <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                </div>
                <p className="tempo-atras">{ memoria.updatedAt.slice(0, 10) }</p>
             </div>

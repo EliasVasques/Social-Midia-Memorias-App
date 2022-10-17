@@ -62,9 +62,26 @@ const removerMemoria = async (req, res) => {
     }
 }
 
+const editarMemoria = async (req, res) => {
+
+    let resposta
+    try {
+        resposta = await memoriaModel.findByIdAndUpdate( req.params.id, req.body )
+    } catch(erro) {
+        console.log(erro)
+    }
+
+    if(resposta) {
+        res.status(200).json(resposta)
+    } else {
+        res.status(400).json({'erro': 'Erro ao adcionar sua memória'})
+    }
+}
+
 module.exports = {
     pegarMemorias,
     addMemoria,
     removerMemoria,
-    pegarMemoria
+    pegarMemoria,
+    editarMemoria
 }

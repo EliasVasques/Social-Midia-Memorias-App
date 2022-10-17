@@ -1,30 +1,27 @@
 import React, { useEffect, useState } from "react"
+import { } from './redux/memoriasSlicer'
+import { useSelector, useDispatch } from 'react-redux'
+import { pegarMemorias } from "./redux/pegarMemoriasthunk"
 
 import Post from './componentes/Post'
 import Form from './componentes/Form'
 
 const App = () => {
 
-  const [memorias, setMemorias] = useState(null)
-
-  const setarMemorias = async () => {
-    await fetch('http://localhost:5000/api/memorias')
-      .then((resposta) => resposta.json()).then((memorias) => setMemorias(memorias))
-  } 
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    setarMemorias()
+    dispatch(pegarMemorias())
   }, [])
-  
+
+  const memorias = useSelector((state) => state.memorias)
+
   return(
     <div className="container">
-
       <div class="posts">
-        {
-          memorias && memorias.map(( memoria ) => (
-            <Post key={memoria._id} memoria={memoria} />
-          ))
-        }
+        { memorias.posts && memorias.posts.map((memoria) => (
+          <Post memoria={memoria} />
+        )) }
       </div>
 
       <div class="container-form">

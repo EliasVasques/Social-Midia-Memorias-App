@@ -15,29 +15,25 @@ form h3 {
 .campo-input {
     position: relative;
     border: 1px solid #aaa;
-    
     padding: 3px;
     margin: 8px 0;
-
     width: 200px;
 }
 
-label {
+.campo-input label {
     position: absolute;
     top: -10px;
     left: 10px;
     background-color: #fff;
 }
 
-input {
-    width: 100%;
-    border: none;
-    outline: 0;
-}
-
 .campo-imagem {
+    padding: 3px;
+    margin: 8px 0;
     width: 200px;
-    margin: 10px 0;
+}
+.campo-imagem input {
+    margin-top: 3px;
 }
 
 input {

@@ -18,11 +18,8 @@ const memoriaSchema  = new Schema({
         type: String,
         required: true
     },
-    /*img: {
-        data: Buffer,
-        contentType: String,
-        required: true
-    },*/
+    /*imagem: {
+    }*/
 }, { timestamps: true })
 
 module.exports = mongoose.model('memoria', memoriaSchema)
