@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState, useRef } from "react"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { pegarMemorias } from '../../redux/pegarMemoriasthunk'
+import { setEditando } from '../../redux/editandoSlicer'
+
 
 import './index.css'
 
 const Form = () => {
-
-    /*const filesElement = useRef(null)*/
 
     const dispatch = useDispatch()
 
@@ -18,30 +18,49 @@ const Form = () => {
     const [tags, setTags] = useState('')
     const [imagem, setImagem] = useState('')
 
+    const memoriaEditando = useSelector((state) => state.editando)
+
+    useEffect(() => {
+        if(memoriaEditando.memoria) {
+            setCriador(memoriaEditando.memoria.criador)
+            setTitulo(memoriaEditando.memoria.titulo)
+            setTexto(memoriaEditando.memoria.texto)
+            setTags(memoriaEditando.memoria.tags)
+            setImagem(memoriaEditando.memoria.imagem)
+        }
+    }, [ memoriaEditando ])
+
 
     const enviar = (e) => {
         e.preventDefault()
         
-        //const memoria = { criador, titulo, texto, tags, imagem }
-        
-        const memoria = new FormData();
-        memoria.append("criador", criador);
-        memoria.append("titulo", titulo);
-        memoria.append("texto", texto);
-        memoria.append("tags", tags);
-        memoria.append("imagem", imagem);
+        const memoria = { criador, titulo, texto, tags, imagem }
 
-        fetch('http://localhost:5000/api/memorias', {
-            method: 'POST',
-            body: /*JSON.stringify(*/memoria/*)*/,
-            headers: {
-                /*'Content-Type': 'application/json',*/
-                "Content-Type": "form-data"
-            }
-        }) 
-        .then(() => {
-            dispatch(pegarMemorias())
-        })
+        if(memoriaEditando.memoria) {
+            fetch(`http://localhost:5000/api/memorias/${memoriaEditando.memoria._id}`, {
+                method: 'PUT',
+                body: JSON.stringify(memoria),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }) 
+            .then(() => {
+                dispatch(pegarMemorias())
+                dispatch(setEditando(null))
+            })
+        } else {
+            fetch('http://localhost:5000/api/memorias', {
+                method: 'POST',
+                body: JSON.stringify(memoria),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }) 
+            .then(() => {
+                dispatch(pegarMemorias())
+            })
+        }
+        limpar()
     }
 
     const limpar = () => {
@@ -49,20 +68,11 @@ const Form = () => {
         setTitulo('')
         setTexto('')
         setTags('')
+        setImagem('')
     }
 
-
-    const setarImagem = (e) => {
-        const arquivo = e.target.files[0];
-        let reader = new FileReader();
-        reader.readAsDataURL(arquivo);
-
-        setImagem(reader.result);
-        console.log(imagem);
-    };
-
     return(
-        <form onSubmit={enviar} encType="multipart/form-data">
+        <form onSubmit={enviar}>
 
             <h3>Criar Memória</h3>
 
@@ -86,12 +96,12 @@ const Form = () => {
                 <input type="text" onChange={(e) => setTags(e.target.value)} value={tags} />
             </div>
             
-            <div className='campo-imagem'>
-                <label>Imagem</label>
-                <input type="file" name="imagem" /*multiple ref={filesElement}*/ onChange={setarImagem} />
+            <div className="campo-input">
+                <label>Imagem (URL)</label>
+                <input type="text" onChange={(e) => setImagem(e.target.value)} value={imagem} />
             </div>
             
-            <button type="submit">Criar</button>
+            <button type="submit">{ memoriaEditando.memoria ? 'Editar' : 'Criar' }</button>
             <button onClick={limpar}>Limpar</button>
         </form>
     )

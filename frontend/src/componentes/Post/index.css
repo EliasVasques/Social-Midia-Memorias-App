@@ -26,12 +26,13 @@
 
 
 .imagem {
+    /* background-image definido inline */
     width: 200px;
     height: 150px;
-    background-size: cover;
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRclejoHlkZCarPR3xN6vNtfhbpUikGi5W10w&usqp=CAU');
+    background-size: cover;  
     padding: 5px;
-    color: #fff;    
+    color: #fff;  
+    background-color: #ccc;  
 }
 .imagem > div {
     display: flex;
@@ -46,4 +47,15 @@
 
 ion-icon {
     cursor: pointer;
+}
+.botoes-rodape {
+    color: #0280F6;
+}
+
+.like {
+    display: flex;
+    align-items: center;
+}
+.like span {
+    font-size: 11px;
 }

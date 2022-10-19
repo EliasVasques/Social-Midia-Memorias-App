@@ -19,8 +19,12 @@ const memoriaSchema  = new Schema({
         required: true
     },
     imagem: {
-        data: Buffer,
-        contentType: String
+        type: String,
+        required: true
+    },
+    like: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true })
 

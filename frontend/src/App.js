@@ -20,7 +20,7 @@ const App = () => {
     <div className="container">
       <div class="posts">
         { memorias.posts && memorias.posts.map((memoria) => (
-          <Post memoria={memoria} />
+          <Post memoria={memoria} key={memoria._id} />
         )) }
       </div>
 

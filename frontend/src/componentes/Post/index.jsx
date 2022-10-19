@@ -3,23 +3,42 @@ import { useDispatch } from 'react-redux'
 
 import './index.css'
 import { pegarMemorias } from "../../redux/pegarMemoriasthunk"
+import { setEditando } from '../../redux/editandoSlicer'
 
 const Post = ({ memoria }) => {
 
     const dispatch = useDispatch()
 
-    const deletarMemoria = async () => {
-        await fetch(`http://localhost:5000/api/memorias/${memoria._id}`, {
+    const deletarMemoria = () => {
+        fetch(`http://localhost:5000/api/memorias/${memoria._id}`, {
             method: 'DELETE'
         })
         dispatch(pegarMemorias())
     }
+
+    const darLike = async () => {
+        const body = { ...memoria, like: memoria.like + 1}
+        fetch(`http://localhost:5000/api/memorias/${memoria._id}`, {
+            method: 'PUT',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(() => {
+            dispatch(pegarMemorias())   
+        })
+    }
+
+    const editarMemoria = () => {
+        dispatch(setEditando(memoria))
+    }
+
     return(
         <div className="post">
-            <div className="imagem">
+            <div className="imagem" style={{ 'backgroundImage': `url(${memoria.imagem}` }}>
                <div>
                    <p className="usuario">{ memoria.criador }</p>
-                   <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                   <ion-icon onClick={editarMemoria} name="ellipsis-horizontal-outline"></ion-icon>
                </div>
                <p className="tempo-atras">{ memoria.updatedAt.slice(0, 10) }</p>
             </div>
@@ -28,9 +47,14 @@ const Post = ({ memoria }) => {
                 <p>{ memoria.tags }</p>
                 <h3>{ memoria.titulo }</h3>
                 <p>{ memoria.texto }</p>
-                <div>
-                    <ion-icon name="thumbs-up-sharp"></ion-icon>
-                    <ion-icon onClick={deletarMemoria} name="trash-sharp"></ion-icon>
+                <div className="botoes-rodape">
+                    <div className="like">
+                        <ion-icon onClick={darLike} name="thumbs-up-sharp"></ion-icon> 
+                        <span>LIKE { memoria.like }</span> 
+                    </div>
+                    <div>
+                        <ion-icon onClick={deletarMemoria} name="trash-sharp"></ion-icon>
+                    </div>
                 </div>
             </div>
         </div>
