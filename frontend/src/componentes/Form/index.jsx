@@ -1,6 +1,5 @@
 import React from 'react'
-import { useEffect } from 'react'
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useDispatch } from 'react-redux'
 
 import { pegarMemorias } from '../../redux/pegarMemoriasthunk'
@@ -8,6 +7,8 @@ import { pegarMemorias } from '../../redux/pegarMemoriasthunk'
 import './index.css'
 
 const Form = () => {
+
+    /*const filesElement = useRef(null)*/
 
     const dispatch = useDispatch()
 
@@ -17,15 +18,25 @@ const Form = () => {
     const [tags, setTags] = useState('')
     const [imagem, setImagem] = useState('')
 
+
     const enviar = (e) => {
         e.preventDefault()
+        
+        //const memoria = { criador, titulo, texto, tags, imagem }
+        
+        const memoria = new FormData();
+        memoria.append("criador", criador);
+        memoria.append("titulo", titulo);
+        memoria.append("texto", texto);
+        memoria.append("tags", tags);
+        memoria.append("imagem", imagem);
 
-        const memoria = { criador, titulo, texto, tags, imagem }
         fetch('http://localhost:5000/api/memorias', {
             method: 'POST',
-            body: JSON.stringify(memoria),
+            body: /*JSON.stringify(*/memoria/*)*/,
             headers: {
-                'Content-Type': 'application/json'
+                /*'Content-Type': 'application/json',*/
+                "Content-Type": "form-data"
             }
         }) 
         .then(() => {
@@ -38,11 +49,20 @@ const Form = () => {
         setTitulo('')
         setTexto('')
         setTags('')
-        setImagem('')
     }
 
+
+    const setarImagem = (e) => {
+        const arquivo = e.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(arquivo);
+
+        setImagem(reader.result);
+        console.log(imagem);
+    };
+
     return(
-        <form onSubmit={enviar} encType='multipart/form-data'>
+        <form onSubmit={enviar} encType="multipart/form-data">
 
             <h3>Criar Memória</h3>
 
@@ -68,7 +88,7 @@ const Form = () => {
             
             <div className='campo-imagem'>
                 <label>Imagem</label>
-                <input type="file" name="imagem" onChange={(e) => setImagem(e.target.value)} value={imagem} />
+                <input type="file" name="imagem" /*multiple ref={filesElement}*/ onChange={setarImagem} />
             </div>
             
             <button type="submit">Criar</button>

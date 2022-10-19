@@ -1,5 +1,4 @@
 const memoriaModel = require('../Models/memoria')
-//const multer = require('multer')
 
 const pegarMemorias = async (req, res) => {
     let resposta 
