@@ -44,7 +44,7 @@ const Post = ({ memoria }) => {
             </div>
             
             <div className="textos">
-                <p>{ memoria.tags }</p>
+                <p>{ memoria.tags.split(',').map((tag) => '#' + tag).join(' ') }</p>
                 <h3>{ memoria.titulo }</h3>
                 <p>{ memoria.texto }</p>
                 <div className="botoes-rodape">

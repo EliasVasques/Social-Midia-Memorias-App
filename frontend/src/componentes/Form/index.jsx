@@ -74,7 +74,7 @@ const Form = () => {
     return(
         <form onSubmit={enviar}>
 
-            <h3>Criar Memória</h3>
+            <h3>{ memoriaEditando.memoria ? `Editando ${titulo}` :'Criar' }</h3>
 
             <div className="campo-input">
                 <label>Criador</label>
@@ -92,7 +92,7 @@ const Form = () => {
             </div>
 
             <div className="campo-input">
-                <label>Tags</label>
+                <label>Tags (separado por vírgula)</label>
                 <input type="text" onChange={(e) => setTags(e.target.value)} value={tags} />
             </div>
             
