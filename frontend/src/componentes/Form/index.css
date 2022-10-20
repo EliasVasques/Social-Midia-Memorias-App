@@ -45,7 +45,22 @@ input {
     outline: 0;
 }
 
-button {
+.submit, .limpar {
     width: 200px;
+    height: 25px;
     margin: 2px 0;
+    color: #fff;
+    border: none;
+
+    font-size: 14px;
+    line-height: 25px;
+    text-align: center;
+    font-weight: 400;
+    cursor: pointer;
+}
+.submit {
+    background-color: #314AA2;
+}
+.limpar {
+    background-color: #FF2051;
 }

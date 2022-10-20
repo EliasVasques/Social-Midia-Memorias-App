@@ -1,26 +1,12 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-/* RESET CSS */
 * {
 	box-sizing: border-box;
 }
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+div {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -28,25 +14,44 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
 
 /* APP CSS */
+body {
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAAABlBMVEUAmv4AmvxnzTtNAAAAvUlEQVR4nO3dzQqAIAwA4Hr/l+7SIaqhG0I/ft9NcqI7OQy2LMDT1l1y2v1wTa4WRAWfk9M6w1qbOk69xJSSFe6glKzGvhPHuwurr9Y4FQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPA+QVfCYrdC/Q0BYC71K8OEbZElCwAAgGJtOCnJAgAA+JGxRZ6SEQAAxiresU9h0VNY5+pfueSP+Rt0kmQBAMDPebBIkCwAAIBOUek0tqR6eYG2AUJMAhe9tmxLAAAAAElFTkSuQmCC");
+ 	background-color: #cccccc;
+	font-family: 'Roboto', sans-serif;
+}
+
 .container {
-	background-color: blanchedalmond;
+	width: 80%;
+	margin: auto;
 	display: grid;
-	grid-template-columns: 5fr 2fr ;
+	grid-template-columns: 3fr 1fr;
 }
-.container-form {
-	display: flex;
-	justify-content: center;
-}
+
 .posts {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+}
+
+.container-form {
+	display: flex;
+	justify-content: flex-end;
+}
+
+@media(max-width: 799px) {
+	.posts {
+		justify-content: center;
+	}
+}
+@media(max-width: 530px) {
+	.container {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	.container-form {
+		justify-content: center;
+		margin: 40px;
+	}
 }

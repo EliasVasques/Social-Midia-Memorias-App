@@ -2,60 +2,67 @@
     width: 200px;
     height: 300px;
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 5px;
 }
 
-.textos {
+.conteudo {
     height: 150px;
-    padding: 5px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.textos > p {
-    font-size: 10px;
-}
-.textos > h3 {
-    font-size: 16px;
-}
-.textos > div {
-    display: flex;
-    justify-content: space-between;
-}
 
+.textos p {
+    font-size: 10px;
+    color: #848484; 
+}
+.textos h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
 
 .imagem {
     /* background-image definido inline */
     width: 200px;
     height: 150px;
     background-size: cover;  
-    padding: 5px;
+    padding: 10px;
     color: #fff;  
-    background-color: #ccc;  
+    background-color: #ccc;
+    border-radius: 10px 10px 0 0;  
 }
+
 .imagem > div {
     display: flex;
     justify-content: space-between; 
 }
+
 .usuario {
     font-size: 16px;
+    margin-bottom: 5px;
 }
-.imagem > .tempo-atras {
+
+.imagem .tempo-atras {
     font-size: 10px;
 }
 
 ion-icon {
     cursor: pointer;
 }
+
 .botoes-rodape {
     color: #0280F6;
+    display: flex;
+    justify-content: space-between;
 }
 
 .like {
     display: flex;
     align-items: center;
 }
+
 .like span {
     font-size: 11px;
 }

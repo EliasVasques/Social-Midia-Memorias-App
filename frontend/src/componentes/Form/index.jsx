@@ -28,6 +28,7 @@ const Form = () => {
             setTags(memoriaEditando.memoria.tags)
             setImagem(memoriaEditando.memoria.imagem)
         }
+        console.log(memoriaEditando)
     }, [ memoriaEditando ])
 
 
@@ -74,7 +75,7 @@ const Form = () => {
     return(
         <form onSubmit={enviar}>
 
-            <h3>{ memoriaEditando.memoria ? `Editando ${titulo}` :'Criar' }</h3>
+            <h3>{ memoriaEditando.memoria ? `Editando "${titulo}"` :'Criar' }</h3>
 
             <div className="campo-input">
                 <label>Criador</label>
@@ -98,11 +99,11 @@ const Form = () => {
             
             <div className="campo-input">
                 <label>Imagem (URL)</label>
-                <input type="text" onChange={(e) => setImagem(e.target.value)} value={imagem} />
+                <input type="text"  onChange={(e) => setImagem(e.target.value)} value={imagem} />
             </div>
             
-            <button type="submit">{ memoriaEditando.memoria ? 'Editar' : 'Criar' }</button>
-            <button onClick={limpar}>Limpar</button>
+            <button type="submit" className='submit'>{ memoriaEditando.memoria ? 'Editar' : 'Criar' }</button>
+            <span type="button" className='limpar' onClick={limpar}>Limpar</span>
         </form>
     )
 }
