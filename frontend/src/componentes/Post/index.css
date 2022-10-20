@@ -14,11 +14,11 @@
     justify-content: space-between;
 }
 
-.textos p {
+.textos > p {
     font-size: 10px;
     color: #848484; 
 }
-.textos h3 {
+.textos > h3 {
     font-size: 18px;
     margin: 10px 0;
 }
@@ -37,14 +37,14 @@
 .imagem > div {
     display: flex;
     justify-content: space-between; 
+    align-items: center;
 }
 
-.usuario {
+.imagem .usuario {
     font-size: 16px;
-    margin-bottom: 5px;
 }
 
-.imagem .tempo-atras {
+.imagem > .tempo-atras {
     font-size: 10px;
 }
 
@@ -62,7 +62,6 @@ ion-icon {
     display: flex;
     align-items: center;
 }
-
 .like span {
     font-size: 11px;
 }

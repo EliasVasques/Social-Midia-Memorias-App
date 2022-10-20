@@ -1,9 +1,9 @@
 import React from "react"
 import { useDispatch } from 'react-redux'
 
-import './index.css'
 import { pegarMemorias } from "../../redux/pegarMemoriasthunk"
 import { setEditando } from '../../redux/editandoSlicer'
+import './index.css'
 
 const Post = ({ memoria }) => {
 
@@ -46,8 +46,6 @@ const Post = ({ memoria }) => {
         const d = new Date()
         const hoje = [ d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate() ]
 
-        //console.log(hoje, ultUpdate)
-
         if(ultUpdate[0] !== hoje[0]) 
             return `${moduloNumero(hoje[0] - ultUpdate[0])} anos atrás`
         else if(ultUpdate[1] !== hoje[1]) 
@@ -69,7 +67,7 @@ const Post = ({ memoria }) => {
         <div className="post">
             <div className="imagem" 
                 style={ memoria.imagem ? { 'backgroundImage': `url(${memoria.imagem}` } 
-                : {'backgroundImage': `url(${urlImagemDefault   })`}}
+                : {'backgroundImage': `url(${urlImagemDefault})`}}
             >
                <div>
                    <p className="usuario">{ memoria.criador }</p>

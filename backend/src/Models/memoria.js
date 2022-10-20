@@ -11,16 +11,13 @@ const memoriaSchema  = new Schema({
         required: true
     },
     texto: {
-        type: String,
-        required: true
+        type: String
     },
     tags: {
-        type: String,
-        required: true
+        type: String
     },
     imagem: {
-        type: String,
-        required: true
+        type: String
     },
     like: {
         type: Number,

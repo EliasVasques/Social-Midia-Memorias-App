@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react"
-import { } from './redux/memoriasSlicer'
+import React, { useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { pegarMemorias } from "./redux/pegarMemoriasthunk"
 
 import Post from './componentes/Post'
 import Form from './componentes/Form'
 import Navbar from './componentes/Navbar'
+
+import { pegarMemorias } from "./redux/pegarMemoriasthunk"
 
 const App = () => {
 
@@ -17,7 +17,8 @@ const App = () => {
 
   const memorias = useSelector((state) => state.memorias)
 
-  return(<div>
+  return(
+    <div>
       <Navbar />
       <div className="container">
         <div class="posts">

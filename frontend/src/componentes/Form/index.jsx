@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react'
-import { useState, useRef } from "react"
+import React from 'react'
+import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 
 import { pegarMemorias } from '../../redux/pegarMemoriasthunk'
 import { setEditando } from '../../redux/editandoSlicer'
-
-
 import './index.css'
 
 const Form = () => {
@@ -37,30 +35,27 @@ const Form = () => {
         
         const memoria = { criador, titulo, texto, tags, imagem }
 
+        let url
+        let metodo
         if(memoriaEditando.memoria) {
-            fetch(`http://localhost:5000/api/memorias/${memoriaEditando.memoria._id}`, {
-                method: 'PUT',
-                body: JSON.stringify(memoria),
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            }) 
+            url = `http://localhost:5000/api/memorias/${memoriaEditando.memoria._id}`
+            metodo = 'PUT'
+        } else {
+            url = `http://localhost:5000/api/memorias`
+            metodo = 'POST'
+        }
+        
+        fetch(url, {
+            method: metodo,
+            body: JSON.stringify(memoria),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }) 
             .then(() => {
                 dispatch(pegarMemorias())
                 dispatch(setEditando(null))
             })
-        } else {
-            fetch('http://localhost:5000/api/memorias', {
-                method: 'POST',
-                body: JSON.stringify(memoria),
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            }) 
-            .then(() => {
-                dispatch(pegarMemorias())
-            })
-        }
         limpar()
     }
 
@@ -79,12 +74,12 @@ const Form = () => {
 
             <div className="campo-input">
                 <label>Criador</label>
-                <input type="text" onChange={(e) =>  setCriador(e.target.value) } value={criador} />
+                <input type="text" required onChange={(e) =>  setCriador(e.target.value) } value={criador} />
             </div>
 
             <div className="campo-input">
                 <label>Título</label>
-                <input type="text" onChange={(e) => setTitulo(e.target.value)} value={titulo} />
+                <input type="text" required onChange={(e) => setTitulo(e.target.value)} value={titulo} />
             </div>
 
             <div className="campo-input">
@@ -99,7 +94,7 @@ const Form = () => {
             
             <div className="campo-input">
                 <label>Imagem (URL)</label>
-                <input type="text"  onChange={(e) => setImagem(e.target.value)} value={imagem} />
+                <input type="text" onChange={(e) => setImagem(e.target.value)} value={imagem} />
             </div>
             
             <button type="submit" className='submit'>{ memoriaEditando.memoria ? 'Editar' : 'Criar' }</button>
